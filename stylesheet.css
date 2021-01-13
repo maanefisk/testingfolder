@@ -36,4 +36,8 @@ button {
 button:hover {
     border: 1px solid white;
     background: skyblue;
+    cursor: pointer;
+}
+.fight {
+    display: none;
 }

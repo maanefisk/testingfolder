@@ -1,16 +1,8 @@
 <html>
-<head><link rel="stylesheet" href="stylesheet.css"><head>
-<body>
-<br>
-<div class="buttoncontainer"><button>New Character</button><button>Fight!</button></div>
-<br>
-<div class="fightarena">
-    <div class="characterslot">Characterslot</div>
-    <div class="enemyslot">Enemyslot</div>
-    <div class="fightaction">Fightaction</div>
-</div>
-
-</body>
+<head>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <head>
 </html>
 
 <?php
@@ -86,14 +78,48 @@ $Spreadterror = new Spreadterror();
 $goodOnes = array($Faramir, $Sam, $Galadriel);
 $badOnes = array($Nazgul, $UrukHai, $Orc);
 
-$randomcharacter = $goodOnes[rand(0,2)]->name;
-//properties of class Bird are accessed using object
+$randomcharacter = $goodOnes[rand(0,2)];
+$randomweapon = $randomcharacter->weapon[rand(0,1)];
+$randomenemy = $badOnes[rand(0,2)];
+$randomenemyweapon = $randomenemy->weapon[rand(0,1)];
+
 echo '<br>  A warrior =  '.$Faramir->name;
 echo '<br>  Faramirs random weapon = '.$Faramir->weapon[rand(0,1)];
 echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
 echo '<br>  One of the Good Ones Weapons = '.$goodOnes[rand(0,2)]->weapon[rand(0,1)];
 echo '<br>  One of the Bad Ones HP = '.$badOnes[rand(0,2)]->HP;
 echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
-echo '<br>'.$randomcharacter;
+echo '<br>'.$randomcharacter->name;
+echo '<br>'.$randomweapon;
+echo '<br>'.$randomenemy->name;
+echo '<br>'.$randomenemyweapon;
+echo '<br>  Characters HP =  '.$randomcharacter->HP;
+echo '<br>  Enemy HP =  '.$randomenemy->HP;
+
 
 ?>
+
+<br>
+<div class="buttoncontainer"><button class="newcharacter">New Character</button><button class="fight">Fight!</button></div>
+<br>
+<div class="fightarena">
+    <div class="characterslot">Characterslot</div>
+    <div class="enemyslot">Enemyslot</div>
+    <div class="fightaction">
+        <div class="ch">Fightaction</div>
+        <div class="en">Fightaction</div>
+        <div class="dp">Fightaction</div>
+    </div>
+</div>
+<script>
+    $('.newcharacter').click(function() {
+        $('.characterslot').text('<?= $randomcharacter->name ?>');
+        $('.enemyslot').text('<?= $randomenemy->name ?>');
+        $(".fight").css("display", "block");
+    });
+    $('.fight').click(function() {
+        $('.ch').text('<?= $randomcharacter->name ?> has chosen: <?= $randomweapon ?>');
+        $('.en').text('<?= $randomenemy->name ?> has chosen: <?= $randomenemyweapon ?>');
+        $('.dp').text('');
+    });
+</script>
