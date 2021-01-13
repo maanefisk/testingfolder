@@ -83,13 +83,19 @@ $randomweapon = $randomcharacter->weapon[rand(0,1)];
 $randomenemy = $badOnes[rand(0,2)];
 $randomenemyweapon = $randomenemy->weapon[rand(0,1)];
 
+/*Get correct variable based on chosen weapon*/
+$usedWeapon = new $randomweapon;
+$usedenemyWeapon = new $randomenemyweapon;
+
 $characterHP = $randomcharacter->HP;
 $enemyHP = $randomenemy->HP;
-$characterdamage = $randomweapon->damage;
-$enemydamage = $randomenemyweapon->damage;
+
+$characterdamage = $usedWeapon->damage;
+$enemydamage = $usedenemyWeapon->damage;
+
 $chHP = ($characterHP - $enemydamage);
 $enHP = ($enemyHP - $characterdamage);
-
+/*
 echo '<br>  A warrior =  '.$Faramir->name;
 echo '<br>  Faramirs random weapon = '.$Faramir->weapon[rand(0,1)];
 echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
@@ -102,34 +108,38 @@ echo '<br>'.$randomenemy->name;
 echo '<br>'.$randomenemyweapon;
 echo '<br>  Characters HP =  '.$randomcharacter->HP;
 echo '<br>  Enemy HP =  '.$randomenemy->HP;
+echo '<br>  Characters Damage =  '.$characterdamage;
 echo '<br>  Calculated Characters HP =  '.$chHP;
 echo '<br>  Calculated Enemy HP =  '.$enHP;
+*/
 
 ?>
 
-<br>
 <div class="buttoncontainer"><button class="newcharacter">New Character</button><button class="fight">Fight!</button></div>
-<br>
 <div class="fightarena">
-    <div class="characterslot">Characterslot</div>
-    <div class="enemyslot">Enemyslot</div>
+    <div class="characterslot"></div>
+    <div class="enemyslot"></div>
     <div class="fightaction">
-        <div class="ch">Fightaction</div>
-        <div class="en">Fightaction</div>
-        <div class="chhp">Fightaction</div>
-        <div class="enhp">Fightaction</div>
+        <div class="ch"></div>
+        <div class="en"></div>
+        <div class="chhp"></div>
+        <div class="enhp"></div>
     </div>
 </div>
+<button class="Reset">Reset</button>
 <script>
     $('.newcharacter').click(function() {
-        $('.characterslot').text('<?= $randomcharacter->name ?>');
-        $('.enemyslot').text('<?= $randomenemy->name ?>');
+        $('.characterslot').text('<?= $characterHP ?> HP <?= $randomcharacter->name ?>');
+        $('.enemyslot').text('<?= $enemyHP ?> HP <?= $randomenemy->name ?>');
         $(".fight").css("display", "block");
     });
     $('.fight').click(function() {
         $('.ch').text('<?= $randomcharacter->name ?> has chosen: <?= $randomweapon ?>');
         $('.en').text('<?= $randomenemy->name ?> has chosen: <?= $randomenemyweapon ?>');
-        $('.chhp').text('<?= $randomcharacter->name ?> has HP left.');
-        $('.enhp').text('<?= $randomenemy->name ?> has HP left.');
+        $('.chhp').text('<?= $randomcharacter->name ?> has <?= $chHP ?>HP left.');
+        $('.enhp').text('<?= $randomenemy->name ?> has <?= $enHP ?>HP left.');
+    });
+    $('.reset').click(function() {
+        location.reload();
     });
 </script>

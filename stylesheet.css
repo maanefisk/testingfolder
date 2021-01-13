@@ -39,5 +39,9 @@ button:hover {
     cursor: pointer;
 }
 .fight {
+    background: #eb87a7;
     display: none;
+}
+.reset {
+    width: 500px;
 }
