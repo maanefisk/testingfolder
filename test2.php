@@ -83,6 +83,13 @@ $randomweapon = $randomcharacter->weapon[rand(0,1)];
 $randomenemy = $badOnes[rand(0,2)];
 $randomenemyweapon = $randomenemy->weapon[rand(0,1)];
 
+$characterHP = $randomcharacter->HP;
+$enemyHP = $randomenemy->HP;
+$characterdamage = $randomweapon->damage;
+$enemydamage = $randomenemyweapon->damage;
+$chHP = ($characterHP - $enemydamage);
+$enHP = ($enemyHP - $characterdamage);
+
 echo '<br>  A warrior =  '.$Faramir->name;
 echo '<br>  Faramirs random weapon = '.$Faramir->weapon[rand(0,1)];
 echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
@@ -95,7 +102,8 @@ echo '<br>'.$randomenemy->name;
 echo '<br>'.$randomenemyweapon;
 echo '<br>  Characters HP =  '.$randomcharacter->HP;
 echo '<br>  Enemy HP =  '.$randomenemy->HP;
-
+echo '<br>  Calculated Characters HP =  '.$chHP;
+echo '<br>  Calculated Enemy HP =  '.$enHP;
 
 ?>
 
@@ -108,7 +116,8 @@ echo '<br>  Enemy HP =  '.$randomenemy->HP;
     <div class="fightaction">
         <div class="ch">Fightaction</div>
         <div class="en">Fightaction</div>
-        <div class="dp">Fightaction</div>
+        <div class="chhp">Fightaction</div>
+        <div class="enhp">Fightaction</div>
     </div>
 </div>
 <script>
@@ -120,6 +129,7 @@ echo '<br>  Enemy HP =  '.$randomenemy->HP;
     $('.fight').click(function() {
         $('.ch').text('<?= $randomcharacter->name ?> has chosen: <?= $randomweapon ?>');
         $('.en').text('<?= $randomenemy->name ?> has chosen: <?= $randomenemyweapon ?>');
-        $('.dp').text('');
+        $('.chhp').text('<?= $randomcharacter->name ?> has HP left.');
+        $('.enhp').text('<?= $randomenemy->name ?> has HP left.');
     });
 </script>
