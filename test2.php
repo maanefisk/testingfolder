@@ -1,4 +1,10 @@
 <?php
+class Character {
+    public $name = '';
+    public $title = '';
+    public $weapon = array();
+    public $HP = 0;
+}
 
 class Sword {
     public $damage = 120;
@@ -71,4 +77,19 @@ echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
 echo '<br>  Good Ones Weapons = '.$goodOnes[rand(0,2)]->weapon[rand(0,1)];
 echo '<br>  One of the Bad Ones HP = '.$badOnes[rand(0,2)]->HP;
 echo '<br>  One of the Good Ones =  '.$goodOnes[rand(0,2)]->name;
+echo '<br>  Get a character =', '<script type="text/javascript">', 'characterChooser();', '</script>';
+
 ?>
+
+<button onclick="characterChooser()">Click Here</button>
+<script>
+    function characterChooser(){
+        let activeCharacter = <?=$goodOnes[rand(0,2)]->name?> ;
+        let activeCharacter2 = 'testo' ;
+        return activeCharacter2;
+        console.log(activeCharacter2);
+    }
+    function weaponChooser(){
+        let weapon = <?=$lang->get('zipcode')?>;
+    }
+</script>
